@@ -1,0 +1,104 @@
+# The environment
+universe       = vanilla
+getenv         = True
+request_cpus   = 1
+request_GPUs   = 1
+request_memory = 10G
+
+# Execution (change the path for the initial directory)
+initial_dir    = /home/smore/Hida_AgePrediction/dl_brainage
+executable     = /home/smore/Hida_AgePrediction/dl_brainage/train_model.py
+
+
+# Job
+log            = /home/smore/Hida_AgePrediction/logs/$(Cluster).$(Process).log
+output         = /home/smore/Hida_AgePrediction/logs/$(Cluster).$(Process).out
+error          = /home/smore/Hida_AgePrediction/logs/$(Cluster).$(Process).err
+
+# input_file, save_path, save_filename, learning_rate, num_epochs, batch_size, train_all_flag (0 or 1), optimizer_name('sdg' or 'adam'), trained_weights
+
+# Example for arguments
+#arguments      = --input_file ./ixi_subject_list_train.csv --save_path ./results --save_filename test --learning_rate 0.0001 --num_epochs 240 --batch_size 3 --train_all_flag 0 --optimizer_name adam --age_range 42,82 --trained_weights ./brain_age/run_20190719_00_epoch_best_mae.p
+#Queue
+
+
+### Train using GM data
+
+# train outermost with narrow age range
+arguments      = --input_file ./data/GM/ixi_subject_list_train.csv --save_path ./results/GM/models --save_filename sgd_0.0001 --learning_rate 0.0001 --optimizer_name sgd --train_all_flag 0 --trained_weights ./brain_age/run_20190914_10_epoch_best_mae.p
+Queue
+
+arguments      = --input_file ./data/GM/ixi_subject_list_train.csv --save_path ./results/GM/models --save_filename sgd_0.001 --learning_rate 0.001 --optimizer_name sgd --train_all_flag 0 --trained_weights ./brain_age/run_20190914_10_epoch_best_mae.p
+Queue
+
+arguments      = --input_file ./data/GM/ixi_subject_list_train.csv --save_path ./results/GM/models --save_filename adam_0.0001 --learning_rate 0.0001 --optimizer_name adam --train_all_flag 0 --trained_weights ./brain_age/run_20190914_10_epoch_best_mae.p
+Queue
+
+arguments      = --input_file ./data/GM/ixi_subject_list_train.csv --save_path ./results/GM/models --save_filename adam_0.001 --learning_rate 0.001 --optimizer_name adam --train_all_flag 0 --trained_weights ./brain_age/run_20190914_10_epoch_best_mae.p
+Queue
+
+
+# train outermost with broad age range
+arguments      = --input_file ./data/GM/ixi_subject_list_train.csv --save_path ./results/GM/models --save_filename sgd_0.0001_broad --learning_rate 0.0001 --optimizer_name sgd --train_all_flag 0 --age_range 18,90 --trained_weights ./brain_age/run_20190914_10_epoch_best_mae.p
+Queue
+
+arguments      = --input_file ./data/GM/ixi_subject_list_train.csv --save_path ./results/GM/models --save_filename sgd_0.001_broad  --learning_rate 0.001 --optimizer_name sgd --train_all_flag 0 --age_range 18,90 --trained_weights ./brain_age/run_20190914_10_epoch_best_mae.p
+Queue
+
+arguments      = --input_file ./data/GM/ixi_subject_list_train.csv --save_path ./results/GM/models --save_filename adam_0.0001_broad  --learning_rate 0.0001 --optimizer_name adam --train_all_flag 0 --age_range 18,90 --trained_weights ./brain_age/run_20190914_10_epoch_best_mae.p
+Queue
+
+arguments      = --input_file ./data/GM/ixi_subject_list_train.csv --save_path ./results/GM/models --save_filename adam_0.001_broad  --learning_rate 0.001 --optimizer_name adam --train_all_flag 0 --age_range 18,90 --trained_weights ./brain_age/run_20190914_10_epoch_best_mae.p
+Queue
+
+
+# train all layers with narrow age range
+arguments      = --input_file ./data/GM/ixi_subject_list_train.csv --save_path ./results/GM/models --save_filename sgd_0.0001_all --learning_rate 0.0001 --optimizer_name sgd --train_all_flag 1 --trained_weights ./brain_age/run_20190914_10_epoch_best_mae.p
+Queue
+
+arguments      = --input_file ./data/GM/ixi_subject_list_train.csv --save_path ./results/GM/models --save_filename sgd_0.001_all --learning_rate 0.001 --optimizer_name sgd --train_all_flag 1 --trained_weights ./brain_age/run_20190914_10_epoch_best_mae.p
+Queue
+
+arguments      = --input_file ./data/GM/ixi_subject_list_train.csv --save_path ./results/GM/models --save_filename adam_0.0001_all --learning_rate 0.0001 --optimizer_name adam --train_all_flag 1 --trained_weights ./brain_age/run_20190914_10_epoch_best_mae.p
+Queue
+
+arguments      = --input_file ./data/GM/ixi_subject_list_train.csv --save_path ./results/GM/models --save_filename adam_0.001_all --learning_rate 0.001 --optimizer_name adam --train_all_flag 1 --trained_weights ./brain_age/run_20190914_10_epoch_best_mae.p
+Queue
+
+
+
+#### Train using T1 data
+
+# train outermost
+arguments      = --input_file ./data/T1/ixi_subject_list_train.csv --save_path ./results/T1/models --save_filename sgd_0.0001 --learning_rate 0.0001 --optimizer_name sgd --train_all_flag 0 --trained_weights ./brain_age/run_20190719_00_epoch_best_mae.p
+Queue
+
+arguments      = --input_file ./data/T1/ixi_subject_list_train.csv --save_path ./results/T1/models --save_filename sgd_0.001 --learning_rate 0.001 --optimizer_name sgd --train_all_flag 0 --trained_weights ./brain_age/run_20190719_00_epoch_best_mae.p
+Queue
+
+arguments      = --input_file ./data/T1/ixi_subject_list_train.csv --save_path ./results/T1/models --save_filename adam_0.0001 --learning_rate 0.0001 --optimizer_name adam --train_all_flag 0 --trained_weights ./brain_age/run_20190719_00_epoch_best_mae.p
+Queue
+
+arguments      = --input_file ./data/T1/ixi_subject_list_train.csv --save_path ./results/T1/models --save_filename adam_0.001 --learning_rate 0.001 --optimizer_name adam --train_all_flag 0 --trained_weights ./brain_age/run_20190719_00_epoch_best_mae.p
+Queue
+
+
+# train all layers
+arguments      = --input_file ./data/T1/ixi_subject_list_train.csv --save_path ./results/T1/models --save_filename sgd_0.0001_all --learning_rate 0.0001 --optimizer_name sgd --train_all_flag 1 --trained_weights ./brain_age/run_20190719_00_epoch_best_mae.p
+Queue
+
+arguments      = --input_file ./data/T1/ixi_subject_list_train.csv --save_path ./results/T1/models --save_filename sgd_0.001_all --learning_rate 0.001 --optimizer_name sgd --train_all_flag 1 --trained_weights ./brain_age/run_20190719_00_epoch_best_mae.p
+Queue
+
+arguments      = --input_file ./data/T1/ixi_subject_list_train.csv --save_path ./results/T1/models --save_filename adam_0.0001_all --learning_rate 0.0001 --optimizer_name adam --train_all_flag 1 --trained_weights ./brain_age/run_20190719_00_epoch_best_mae.p
+Queue
+
+arguments      = --input_file ./data/T1/ixi_subject_list_train.csv --save_path ./results/T1/models --save_filename adam_0.001_all --learning_rate 0.001 --optimizer_name adam --train_all_flag 1 --trained_weights ./brain_age/run_20190719_00_epoch_best_mae.p
+Queue
+
+
+
+
+
+
+

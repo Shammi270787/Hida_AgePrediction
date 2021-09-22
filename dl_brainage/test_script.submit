@@ -1,0 +1,115 @@
+# The environment
+universe       = vanilla
+getenv         = True
+request_cpus   = 1
+request_GPUs   = 1
+request_memory = 5G
+
+# Execution (change the path for the initial directory)
+initial_dir    = /home/smore/Hida_AgePrediction/dl_brainage
+executable     = /home/smore/Hida_AgePrediction/dl_brainage/test_model.py
+
+
+# Job
+log            = /home/smore/Hida_AgePrediction/logs/$(Cluster).$(Process).log
+output         = /home/smore/Hida_AgePrediction/logs/$(Cluster).$(Process).out
+error          = /home/smore/Hida_AgePrediction/logs/$(Cluster).$(Process).err
+
+
+#arguments      = --input_file ./ixi_subject_list_test.csv --save_path ./results --save_filename original --age_range 42,82
+#Queue
+
+#arguments      = --input_file ./ixi_subject_list_test.csv --save_path ./results --save_filename train_last --age_range 42,82 --trained_weights ./results/train_samples_42_82_model.pt
+#Queue
+
+#arguments      = --input_file ./ixi_subject_list_test.csv --save_path ./results --save_filename train_19_88 --age_range 19,88 --trained_weights ./results/train_samples_19_88_model.pt
+#Queue
+
+# GM: train outermost with narrow age range
+#arguments      = --input_file ./data/GM/ixi_subject_list_test.csv --save_path ./results/GM/predictions --save_filename sgd_0.0001_1 --age_range 42,82 --trained_weights ./results/GM/models/sgd_0.0001_model_1.pt
+#Queue
+
+#arguments      = --input_file ./data/GM/ixi_subject_list_test.csv --save_path ./results/GM/predictions --save_filename sgd_0.001_1 --age_range 42,82 --trained_weights ./results/GM/models/sgd_0.001_model_1.pt
+#Queue
+
+#arguments      = --input_file ./data/GM/ixi_subject_list_test.csv --save_path ./results/GM/predictions --save_filename adam_0.0001_1 --age_range 42,82 --trained_weights ./results/GM/models/adam_0.0001_model_1.pt
+#Queue
+
+#arguments      = --input_file ./data/GM/ixi_subject_list_test.csv --save_path ./results/GM/predictions --save_filename adam_0.001_1 --age_range 42,82 --trained_weights ./results/GM/models/adam_0.001_model_1.pt
+#Queue
+
+#arguments      = --input_file ./data/GM/ixi_subject_list_test.csv --save_path ./results/GM/predictions --save_filename original_model_GM --age_range 42,82 --trained_weights ./brain_age/run_20190914_10_epoch_best_mae.p
+#Queue
+
+
+# GM: train outermost with broad age range
+#arguments      = --input_file ./data/GM/ixi_subject_list_test.csv --save_path ./results/GM/predictions --save_filename sgd_0.0001_broad_1 --age_range 18,90 --trained_weights ./results/GM/models/sgd_0.0001_broad_model_1.pt
+#Queue
+
+#arguments      = --input_file ./data/GM/ixi_subject_list_test.csv --save_path ./results/GM/predictions --save_filename sgd_0.001_broad_1  --age_range 18,90 --trained_weights ./results/GM/models/sgd_0.001_broad_model_1.pt
+#Queue
+
+#arguments      = --input_file ./data/GM/ixi_subject_list_test.csv --save_path ./results/GM/predictions --save_filename adam_0.0001_broad_1  --age_range 18,90 --trained_weights ./results/GM/models/adam_0.0001_broad_model_1.pt
+#Queue
+
+#arguments      = --input_file ./data/GM/ixi_subject_list_test.csv --save_path ./results/GM/predictions --save_filename adam_0.001_broad_1  --age_range 18,90 --trained_weights ./results/GM/models/adam_0.001_broad_model_1.pt
+#Queue
+
+
+# GM: train all layers with narrow age range
+#arguments      = --input_file ./data/GM/ixi_subject_list_test.csv --save_path ./results/GM/predictions --save_filename sgd_0.0001_all_1 --age_range 42,82 --trained_weights ./results/GM/models/sgd_0.0001_all_model_1.pt
+#Queue
+
+#arguments      = --input_file ./data/GM/ixi_subject_list_test.csv --save_path ./results/GM/predictions --save_filename sgd_0.001_all_1 --age_range 42,82 --trained_weights ./results/GM/models/sgd_0.001_all_model_1.pt
+#Queue
+
+#arguments      = --input_file ./data/GM/ixi_subject_list_test.csv --save_path ./results/GM/predictions --save_filename adam_0.0001_all_1 --age_range 42,82 --trained_weights ./results/GM/models/adam_0.0001_all_model_1.pt
+#Queue
+
+#arguments      = --input_file ./data/GM/ixi_subject_list_test.csv --save_path ./results/GM/predictions --save_filename adam_0.001_all_1 --age_range 42,82 --trained_weights ./results/GM/models/adam_0.001_all_model_1.pt
+#Queue
+
+
+# T1: NO training, use original model to get predictions
+
+arguments      = --input_file ./data/T1/ixi_subject_list_test.csv --save_path ./results/T1/predictions --save_filename original_model_T1_test --age_range 42,82 --trained_weights ./brain_age/run_20190719_00_epoch_best_mae.p
+Queue
+
+
+
+arguments      = --input_file ./data/T1/ixi_subject_list.csv --save_path ./results/T1/predictions --save_filename original_model_T1_allsamples --age_range 42,82 --trained_weights ./brain_age/run_20190719_00_epoch_best_mae.p
+Queue
+
+# T1: train outermost with narrow age range
+arguments      = --input_file ./data/T1/ixi_subject_list_test.csv --save_path ./results/T1/predictions --save_filename sgd_0.0001_1 --age_range 42,82 --trained_weights ./results/T1/models/sgd_0.0001_model_1.pt
+Queue
+
+arguments      = --input_file ./data/T1/ixi_subject_list_test.csv --save_path ./results/T1/predictions --save_filename sgd_0.001_1 --age_range 42,82 --trained_weights ./results/T1/models/sgd_0.001_model_1.pt
+Queue
+
+arguments      = --input_file ./data/T1/ixi_subject_list_test.csv --save_path ./results/T1/predictions --save_filename adam_0.0001_1 --age_range 42,82 --trained_weights ./results/T1/models/adam_0.0001_model_1.pt
+Queue
+
+arguments      = --input_file ./data/T1/ixi_subject_list_test.csv --save_path ./results/T1/predictions --save_filename adam_0.001_1 --age_range 42,82 --trained_weights ./results/T1/models/adam_0.001_model_1.pt
+Queue
+
+
+
+
+# T1: train all layers with narrow age range
+arguments      = --input_file ./data/T1/ixi_subject_list_test.csv --save_path ./results/T1/predictions --save_filename sgd_0.0001_all_1 --age_range 42,82 --trained_weights ./results/T1/models/sgd_0.0001_all_model_1.pt
+Queue
+
+arguments      = --input_file ./data/T1/ixi_subject_list_test.csv --save_path ./results/T1/predictions --save_filename sgd_0.001_all_1 --age_range 42,82 --trained_weights ./results/T1/models/sgd_0.001_all_model_1.pt
+Queue
+
+arguments      = --input_file ./data/T1/ixi_subject_list_test.csv --save_path ./results/T1/predictions --save_filename adam_0.0001_all_1 --age_range 42,82 --trained_weights ./results/T1/models/adam_0.0001_all_model_1.pt
+Queue
+
+arguments      = --input_file ./data/T1/ixi_subject_list_test.csv --save_path ./results/T1/predictions --save_filename adam_0.001_all_1 --age_range 42,82 --trained_weights ./results/T1/models/adam_0.001_all_model_1.pt
+Queue
+
+
+
+
+
