@@ -1,4 +1,4 @@
-# Juelich_Bonn_AgePrediction
+# AgePrediction using CNN
 
 Age prediction Bonn-Juelich
 
